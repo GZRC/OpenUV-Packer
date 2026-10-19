@@ -1,5 +1,15 @@
 # Rapport de livraison — Phase 1
 
+## Correctif 0.1.1 — 19 octobre 2026
+
+Marge configurée avec une précision de quatre décimales et un pas de réglage de 0.0001 UV.
+Texte de destination remplacé par une flèche ASCII pour éliminer les caractères mal encodés.
+Version du paquet et titre du panneau : 0.1.1. Aucun changement d'algorithme de packing.
+Tests Blender 5.2.2 réexécutés : `OPENUV_BLENDER_SMOKE_OK` et `OPENUV_PACKAGE_OK`.
+Le ZIP installable a été reconstruit. L'affichage du panneau n'a pas été contrôlé visuellement.
+
+## Rapport initial 0.1.0
+
 Date : 19 octobre 2026. Phase 1 réalisée et testée sur la machine locale ; les phases 2–5 restent à développer.
 
 ## Environnement et compilation

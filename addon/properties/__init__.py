@@ -3,7 +3,10 @@ import bpy
 from bpy.props import FloatProperty, BoolProperty, EnumProperty
 
 def register_properties():
-    bpy.types.Scene.openuv_margin = FloatProperty(name='Border per island (UV)', default=.002, min=0, max=.49)
+    bpy.types.Scene.openuv_margin = FloatProperty(
+        name='Border per island (UV)', default=.002, min=0, max=.49,
+        precision=4, step=.01,
+        description='Border on each side of an island; island spacing is twice this value')
     bpy.types.Scene.openuv_rotate = BoolProperty(name='Allow 90° rotation', default=True)
     bpy.types.Scene.openuv_backend = EnumProperty(name='Engine', items=[('AUTO','Auto','Native if installed'),('PYTHON','Python CPU','Portable fallback'),('NATIVE','C++ CPU','Requires compiled engine')])
 

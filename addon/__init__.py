@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 bl_info = {'name': 'OpenUV Packer', 'author': 'OpenUV Packer contributors',
-           'version': (0,1,0), 'blender': (4,5,0), 'location': 'UV Editor > Sidebar > OpenUV',
+           'version': (0,1,1), 'blender': (4,5,0), 'location': 'UV Editor > Sidebar > OpenUV',
            'description': 'Independent conservative UV island packer', 'category': 'UV'}
 import bpy
 from .operators.pack import OPENUV_OT_pack, islands

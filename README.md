@@ -1,4 +1,7 @@
-# OpenUV Packer — phase 1, version 0.1.0
+# OpenUV Packer — phase 1, version 0.1.1
+
+Correction 0.1.1 : marge affichée avec quatre décimales et texte du panneau corrigé.
+L'algorithme de packing reste celui de la phase 1.
 
 Add-on Blender gratuit sous **GPL-3.0-or-later**, sans moteur externe de packing.
 Algorithmes propres au projet ; aucune dépendance à UVPackmaster, Xatlas ou UVAtlas.
