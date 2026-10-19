@@ -17,12 +17,15 @@ with tempfile.TemporaryDirectory(prefix='openuv-package-', dir=scratch) as temp:
     sys.path.insert(0,temp)
     addon_utils.enable('openuv_packer', default_set=False)
     assert addon_utils.check('openuv_packer')[1], 'Packaged add-on failed to enable'
+    assert sys.modules['openuv_packer'].bl_info['version'] == (0,2,0)
     bpy.ops.mesh.primitive_cube_add()
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.context.scene.tool_settings.use_uv_select_sync = True
     bpy.ops.mesh.select_all(action='SELECT')
     bpy.context.scene.openuv_backend = 'NATIVE'
+    bpy.context.scene.openuv_quality = 'HIGH'
     assert bpy.ops.uv.openuv_pack() == {'FINISHED'}
+    assert '8 searches' in bpy.context.scene.openuv_stats_engine
     bpy.ops.object.mode_set(mode='OBJECT')
     addon_utils.disable('openuv_packer', default_set=False)
 print('OPENUV_PACKAGE_OK')

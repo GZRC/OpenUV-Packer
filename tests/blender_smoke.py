@@ -48,6 +48,8 @@ for backend,sync in (('PYTHON',True),('AUTO',False)):
     bpy.context.scene.tool_settings.use_uv_select_sync = sync
     bpy.context.scene.openuv_backend = backend
     assert bpy.ops.uv.openuv_pack() == {'FINISHED'}
+    assert 'islands' in bpy.context.scene.openuv_stats
+    assert 'box area' in bpy.context.scene.openuv_stats_detail
     boxes = []
     for group in addon.islands(bm,layer):
         coords = [l[layer].uv for f in group for l in f.loops]

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Conservative shelf packing, independent of Blender and third-party packers."""
+"""Native MaxRects bridge and portable Shelf fallback, independent of Blender."""
 import math
 import pathlib
 import subprocess
@@ -52,23 +52,41 @@ def pack_python(boxes, margin=.002, rotate=True):
     return best
 
 
-def pack(boxes, margin=.002, rotate=True, backend='AUTO'):
+def pack(boxes, margin=.002, rotate=True, backend='AUTO', quality='BALANCED'):
     validate(boxes, margin)
+    presets = {'FAST': 0, 'BALANCED': 1, 'HIGH': 2}
+    if quality not in presets:
+        raise ValueError('Unknown quality preset')
     exe = pathlib.Path(__file__).resolve().parents[1]/'bin'/('openuv_engine.exe' if sys.platform == 'win32' else 'openuv_engine')
     if backend == 'NATIVE' or (backend == 'AUTO' and exe.exists()):
         if not exe.exists():
             raise ValueError('Native engine missing: build with scripts/build.ps1')
-        data = f'{len(boxes)} {margin:.17g} {int(rotate)} 2\n'
+        data = f'{len(boxes)} {margin:.17g} {int(rotate)} 2 {presets[quality]}\n'
         data += '\n'.join(f'{w:.17g} {h:.17g}' for w,h in boxes)
         proc = subprocess.run([str(exe)], input=data, text=True, capture_output=True, timeout=120,
                               creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == 'win32' else 0)
         if proc.returncode:
             raise ValueError(proc.stderr.strip())
         lines = proc.stdout.splitlines()
+        if len(lines) != len(boxes)+1:
+            raise ValueError('Native engine returned an invalid number of placements')
         scale = float(lines[0])
-        places = [(float(x),float(y),bool(int(r))) for x,y,r in (line.split() for line in lines[1:])]
+        places = []
+        for line in lines[1:]:
+            x,y,r = line.split()
+            if r not in ('0','1') or (r == '1' and not rotate):
+                raise ValueError('Native engine returned an invalid rotation')
+            places.append((float(x),float(y),bool(int(r))))
         check(boxes, margin, scale, places)
-        return scale, places, 'C++ CPU (2 searches)'
+        label = 'C++ CPU'
+        for line in proc.stderr.splitlines():
+            if line.startswith('OPENUV '):
+                _,algorithm,count,skipped = line.split()
+                label += f': {algorithm}, {int(count)} searches'
+                if skipped == '1':
+                    label += ' (MaxRects size limit)'
+                break
+        return scale, places, label
     result = pack_python(boxes, margin, rotate)
     check(boxes, margin, result[0], result[1])
     return result

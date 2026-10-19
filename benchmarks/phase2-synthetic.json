@@ -1,0 +1,194 @@
+[
+  {
+    "name": "synthetic-10",
+    "islands": 10,
+    "margin": 0.002,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 8.789810186485703,
+    "cases": {
+      "shelf": {
+        "scale": 0.4809011923067991,
+        "bbox_area": 0.7655960993130547,
+        "seconds": [
+          0.010965999999825726,
+          0.008833200001390651,
+          0.008966899998995359
+        ],
+        "median_seconds": 0.008966899998995359,
+        "engine_metadata": "OPENUV Shelf-Area 2 0"
+      },
+      "portfolio": {
+        "scale": 0.5231714942951133,
+        "bbox_area": 0.906100041049604,
+        "seconds": [
+          0.010878900000534486,
+          0.009734600000228966,
+          0.009371199999804958
+        ],
+        "median_seconds": 0.009734600000228966,
+        "engine_metadata": "OPENUV MaxRects-BAF-Area 6 0"
+      }
+    }
+  },
+  {
+    "name": "synthetic-51",
+    "islands": 51,
+    "margin": 0.002,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 3.656314233323843,
+    "cases": {
+      "shelf": {
+        "scale": 0.21730240702035064,
+        "bbox_area": 0.8169690693915651,
+        "seconds": [
+          0.009424199999557459,
+          0.008930699999837088,
+          0.009165299999949639
+        ],
+        "median_seconds": 0.009165299999949639,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.22524766585759104,
+        "bbox_area": 0.87780315815284,
+        "seconds": [
+          0.019629999998869607,
+          0.020041100000526058,
+          0.019738599999982398
+        ],
+        "median_seconds": 0.019738599999982398,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "synthetic-100",
+    "islands": 100,
+    "margin": 0.002,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 5.281068161139624,
+    "cases": {
+      "shelf": {
+        "scale": 0.18034197804622032,
+        "bbox_area": 0.7908729921834168,
+        "seconds": [
+          0.010999600001014187,
+          0.009976299999834737,
+          0.009798499999305932
+        ],
+        "median_seconds": 0.009976299999834737,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.1898659608299887,
+        "bbox_area": 0.8766117952941485,
+        "seconds": [
+          0.05692740000085905,
+          0.06424030000016501,
+          0.05562060000011115
+        ],
+        "median_seconds": 0.05692740000085905,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "synthetic-256",
+    "islands": 256,
+    "margin": 0.002,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 2.398484716450988,
+    "cases": {
+      "shelf": {
+        "scale": 0.11420409734201963,
+        "bbox_area": 0.8042946356471965,
+        "seconds": [
+          0.013491800000338117,
+          0.012606500000401866,
+          0.013675199999852339
+        ],
+        "median_seconds": 0.013491800000338117,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.11694326516232878,
+        "bbox_area": 0.843339092371942,
+        "seconds": [
+          0.5799166999986483,
+          0.6984455000001617,
+          0.5744381000004068
+        ],
+        "median_seconds": 0.5799166999986483,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "synthetic-1000",
+    "islands": 1000,
+    "margin": 0.002,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 0.0,
+    "cases": {
+      "shelf": {
+        "scale": 0.05264680213135623,
+        "bbox_area": 0.7239252471564636,
+        "seconds": [
+          0.03316610000001674,
+          0.03358229999867035,
+          0.032724700000471785
+        ],
+        "median_seconds": 0.03316610000001674,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.05264680213135623,
+        "bbox_area": 0.7239252471564636,
+        "seconds": [
+          0.03320270000040182,
+          0.032947299998340895,
+          0.03273739999895042
+        ],
+        "median_seconds": 0.032947299998340895,
+        "engine_metadata": "OPENUV Shelf-Side 2 1"
+      }
+    }
+  },
+  {
+    "name": "synthetic-10000",
+    "islands": 10000,
+    "margin": 0.002,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 0.0,
+    "cases": {
+      "shelf": {
+        "scale": 0.011717246063970056,
+        "bbox_area": 0.3514489040232115,
+        "seconds": [
+          0.5928576000005705,
+          0.575473900000361,
+          0.5648977000000741
+        ],
+        "median_seconds": 0.575473900000361,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.011717246063970056,
+        "bbox_area": 0.3514489040232115,
+        "seconds": [
+          0.5636696000001393,
+          0.5656574000004184,
+          0.5845573999995395
+        ],
+        "median_seconds": 0.5656574000004184,
+        "engine_metadata": "OPENUV Shelf-Side 2 1"
+      }
+    }
+  }
+]

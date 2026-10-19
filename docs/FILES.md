@@ -1,4 +1,4 @@
-# Fichiers livrés
+# Fichiers livrés — 0.2.0
 
 - `.gitignore`
 - `CMakeLists.txt`
@@ -13,31 +13,44 @@
 - `addon/panels/__init__.py`
 - `addon/panels/main.py`
 - `addon/properties/__init__.py`
+- `benchmarks/phase2-model.json`
+- `benchmarks/phase2-summary.csv`
+- `benchmarks/phase2-synthetic.json`
 - `benchmarks/windows-local.csv`
 - `benchmarks/windows-local.json`
+- `dist/OpenUV-Packer-addon.zip`
 - `docs/ARCHITECTURE.md`
 - `docs/BUILD.md`
 - `docs/FILES.md`
+- `docs/PHASE2_REPORT.md`
 - `docs/ROADMAP.md`
 - `docs/SPECIFICATION.md`
 - `docs/TEST_REPORT.md`
 - `docs/logs/build.txt`
 - `docs/logs/package.txt`
+- `docs/logs/phase2-build.txt`
+- `docs/logs/phase2-package.txt`
+- `docs/logs/phase2-real-mesh.txt`
+- `docs/logs/phase2-tests.txt`
 - `docs/logs/tests.txt`
-- `engine/algorithms/README.md`
-- `engine/cpu/README.md`
-- `engine/geometry/README.md`
+- `engine/algorithms/maxrects.cpp`
+- `engine/cpu/search.cpp`
+- `engine/geometry/validate.cpp`
 - `engine/gpu/README.md`
 - `engine/include/openuv.hpp`
 - `engine/src/core.cpp`
 - `engine/src/main.cpp`
 - `examples/README.md`
 - `scripts/benchmark.py`
+- `scripts/benchmark_phase2.py`
 - `scripts/build.ps1`
+- `scripts/extract_benchmark_blender.py`
 - `scripts/package.ps1`
 - `scripts/test.ps1`
 - `shaders/README.md`
+- `tests/blender_real_mesh.py`
 - `tests/blender_smoke.py`
+- `tests/maxrects_tests.cpp`
 - `tests/native_tests.cpp`
 - `tests/package_smoke.py`
 - `tests/test_packing.py`

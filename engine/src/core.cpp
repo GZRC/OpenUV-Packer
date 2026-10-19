@@ -32,7 +32,11 @@ Result solve(const std::vector<Box>& b,double m,bool rot,int strategy) {
  Result out; if(!attempt(0,out.p))throw std::runtime_error("Margins cannot fit all islands");
  double lo=0,hi=1; std::vector<Place> tmp;
  while(attempt(hi,tmp) && hi<1e12)hi*=2;
- for(int k=0;k<64;++k){double mid=(lo+hi)/2;if(attempt(mid,tmp))lo=mid;else hi=mid;}
- out.scale=lo*(1-1e-12);attempt(out.scale,out.p);return out;
+ for(int k=0;k<64;++k){double mid=(lo+hi)/2;if(attempt(mid,tmp)){lo=mid;out.p=tmp;}else hi=mid;}
+ // Retain an actually feasible placement. Shrinking at fixed origins is safe;
+ // re-running a heuristic at a smaller scale is not necessarily monotone.
+ out.scale=lo*(1-1e-12);out.algorithm=strategy==0 ? "Shelf-Area" : "Shelf-Side";
+ if(out.scale<=0)throw std::runtime_error("UV dimensions exceed numerical packing range");
+ return out;
 }
 }

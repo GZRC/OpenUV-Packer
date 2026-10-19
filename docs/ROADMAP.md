@@ -1,9 +1,15 @@
-# Feuille de route et critères de passage
+# Feuille de route
 
-1. **CPU MVP** : add-on installable, îlots, étagères, rotation, marges, tests natifs et Blender, preuve de compilation et ZIP. Compléter la validation Blender 4.5, les scènes réelles et les limites numériques.
-2. **C++ avancé** : contours orientés, trous et validation géométrique, intersection robuste, MaxRects/Skyline, placement polygonal, heuristiques puis recherche configurable. Référence CPU et jeux de tests adverses avant toute promesse.
-3. **UDIM et contraintes** : attribution des tuiles, obstacles épinglés, groupes, empilement explicite, conservation des overlaps voulus ; tests de non-régression.
-4. **Vulkan** : détection des appareils, buffers, shaders de collision/évaluation, synchronisation, fallback CPU. Comparer décisions et géométrie CPU/GPU avec tolérances avant benchmark. Aucun backend implémenté dans la phase 1.
-5. **Optimisation** : benchmarks répétés, mémoire et corpus de scènes, comparaison à Blender sur données identiques, ergonomie et annulation asynchrone.
+1. **Phase 1 — livrée (0.1.x)** : îlots, rectangles, marges, rotation, C++ indépendant, Undo/Redo, ZIP et tests.
+2. **Phase 2 — en cours (0.2.0)** : MaxRects propre au projet, BSSF/BAF/Bottom Left, recherche configurable,
+   baseline Shelf, validations et statistiques. Prochain jalon : contours, trous, géométrie robuste,
+   placement polygonal et tests adverses, puis Skyline et recherche locale. La phase 2 complète du cahier
+   des charges n'est donc pas encore achevée.
+3. **Phase 3** : UDIM, obstacles verrouillés, groupes, empilement et conservation des overlaps intentionnels.
+4. **Phase 4** : Vulkan effectif (appareils, buffers, collisions, synchronisation), comparaison CPU/GPU,
+   tolérances, fallback et benchmarks avant toute annonce d'accélération.
+5. **Phase 5** : mémoire, corpus réel, comparaisons contrôlées à Blender Pack Islands, ergonomie,
+   annulation et optimisation à partir des mesures.
 
-Chaque phase doit fournir code, tests, compilation, documentation et rapport honnête.
+Le high poly exige des tests d'extraction/application en plus du benchmark de packing :
+les coûts en faces et en îlots doivent être distingués.

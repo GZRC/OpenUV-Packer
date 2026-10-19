@@ -1,43 +1,66 @@
-# OpenUV Packer — phase 1, version 0.1.1
+# OpenUV Packer 0.2.0 — MaxRects CPU
 
-Correction 0.1.1 : marge affichée avec quatre décimales et texte du panneau corrigé.
-L'algorithme de packing reste celui de la phase 1.
+Add-on Blender gratuit, GPL-3.0-or-later. Moteur C++20 propre au projet ;
+aucune dépendance à UVPackmaster, Xatlas ou UVAtlas. Utilisation hors ligne, sans télémétrie.
 
-Add-on Blender gratuit sous **GPL-3.0-or-later**, sans moteur externe de packing.
-Algorithmes propres au projet ; aucune dépendance à UVPackmaster, Xatlas ou UVAtlas.
-Aucune connexion requise à l’utilisation. Pas de télémétrie.
+[Télécharger le ZIP installable](dist/OpenUV-Packer-addon.zip) : utiliser **Download raw file**.
 
-[Télécharger le ZIP installable](dist/OpenUV-Packer-addon.zip) (Download raw file).
+## Installation
 
-## Installer
+1. Blender → Édition → Préférences → Installer depuis un disque : sélectionner le ZIP intact.
+2. Activer OpenUV Packer ; après une mise à jour, redémarrer Blender. Le panneau doit afficher **0.2.0**.
+3. Sélectionner un seul maillage en mode Édition, avec une UV map.
+4. Dans l'éditeur UV, sélectionner les îlots, puis **N → OpenUV → Pack OpenUV**.
 
-1. Télécharger/décompresser `OpenUV-Packer-addon.zip` seulement si vous souhaitez inspecter son contenu ; pour installer, conserver le ZIP intact.
-2. Blender : Édition → Préférences → Extensions/Add-ons → menu → Installer depuis un disque ; choisir le ZIP, puis activer OpenUV Packer.
-3. Créer une UV map, passer en mode Édition, ouvrir l’éditeur UV et sélectionner les îlots.
-4. Barre latérale (N) → OpenUV → Pack OpenUV.
-5. Pour tout packer, sélectionner toutes les faces/UV visibles avant l’opération.
+Les îlots visibles partiellement sélectionnés sont traités en entier. Pour tout packer, sélectionner
+toutes les faces/UV visibles. Les UV non sélectionnés ne sont pas des obstacles.
+Le packing déplace les UV et peut donc désaligner une texture existante : tester sur une copie.
+Blender 5.2.2 a été testé ; Blender 4.5 LTS reste la cible initiale à vérifier.
 
-Le ZIP inclut le moteur Windows x64 lorsqu’il a été compilé. Auto utilise le C++ présent,
-sinon le moteur Python de secours. Les modes C++ et Python peuvent donner des placements
-différents ; chacun est validé avant application. L’UI indique le moteur effectivement utilisé.
-Blender 4.5 LTS est la cible initiale ; consulter `docs/TEST_REPORT.md` pour les versions réellement testées.
+## Nouveautés 0.2.0
 
-## Fonctions de cette phase
+- MaxRects C++ : BSSF (ajustement au petit côté), BAF (aire libre), Bottom Left.
+- Deux ordres stables : aire et plus grand côté, rotations 0/90° évaluées au placement.
+- Le meilleur placement des deux variantes de l'ancien moteur Shelf reste candidat.
+  Le résultat retenu ne diminue donc pas l'échelle de cette référence, à données et marge identiques.
+- Recherche CPU limitée à deux workers ; sélection déterministe pour une entrée identique.
+- Contrôle natif des limites et des collisions, puis seconde vérification dans le pont Python.
+- Statistiques : temps total de l'opération Blender, échelle commune appliquée, aire des rectangles
+  hors marges, moteur et stratégie retenue. L'aire affichée n'est **pas** une occupation polygonale.
+- Marge affichée avec quatre décimales ; interface corrigée depuis 0.1.1.
 
-- Îlots connexes par arêtes du maillage et continuité des deux extrémités UV (tolérance 1e-7).
-- Une sélection partielle étendue à l’îlot visible complet ; sync de sélection pris en compte.
-- Rectangles englobants, placement par étagères, deux ordres de tri, recherche d’une échelle commune.
-- Rotation optionnelle 0/90°, conservation de l’échelle relative et des proportions.
-- Marge UV par côté de rectangle : une valeur m crée au moins 2m entre îlots et m au bord.
-- Validation des dimensions, des résultats finis, des limites de tuile et des intersections de rectangles.
-- Refus des îlots épinglés, des UV dégénérés et de l’édition multi-objets.
-- Opérateur Blender enregistré pour Undo/Redo ; aucune modification de la géométrie 3D.
-- OpenUVCore indépendant de Blender ; moteur CLI C++20 ; deux recherches CPU concurrentes dans le CLI.
+| Qualité C++ | Recherches MaxRects | Heuristiques | Limite d'îlots |
+|---|---:|---|---:|
+| Fast | 2 | BSSF, deux tris | 128 |
+| Balanced | 4 | BSSF + BAF, deux tris | 256 |
+| High | 6 | BSSF + BAF + Bottom Left, deux tris | 512 |
 
-## Compiler sous Windows x64
+Les deux recherches Shelf sont ajoutées à ces nombres. Au-delà de la limite du préréglage,
+le moteur utilise Shelf et le signale dans ses statistiques. Ces limites concernent les **îlots**,
+pas le nombre de triangles : un maillage high poly de 51 îlots peut bénéficier de MaxRects.
+L'interface est synchrone ; le timeout du processus natif est de 120 secondes, pas une limite de recherche configurable.
 
-Installer CMake ≥ 3.20 et Visual Studio Build Tools avec la charge C++.
-Depuis PowerShell dans ce dépôt :
+**Auto** : C++ si le binaire est présent, sinon secours Python Shelf. **Python CPU** reste l'algorithme
+historique, sans MaxRects ; son réglage de qualité est sans effet. Un binaire natif présent mais défaillant
+produit une erreur explicite. Aucun mode GPU factice.
+
+## Marges et géométrie
+
+Une marge m est réservée par côté du rectangle : au moins 2m entre îlots et m au bord de la tuile.
+L'échelle est commune, les proportions et l'échelle relative des îlots sont conservées.
+Une échelle 0.9 signifie une réduction de 10 % des longueurs UV, pas de 10 % de l'aire.
+Le moteur distingue les îlots par continuité UV des deux extrémités des arêtes du maillage.
+L'opération prend en charge Undo/Redo et ne change pas les coordonnées 3D.
+
+Les faces cachées sont exclues ; les arêtes non manifold délimitent les îlots.
+UV épinglés, dimensions nulles et édition multi-objets sont refusés.
+La séparation est vérifiée entre les rectangles des îlots traités, pas à l'intérieur d'un même îlot :
+les auto-chevauchements préexistants ne sont pas réparés. Seule la tuile 1001 ([0,1]²) est utilisée.
+Tolérances : 1e-9 pour la validation double, 1e-6 dans les tests après stockage float32 Blender.
+
+## Compiler et tester
+
+CMake ≥ 3.20, compilateur C++20 et Windows x64. Avec MSVC installé :
 
 ```powershell
 ./scripts/build.ps1
@@ -45,57 +68,45 @@ Depuis PowerShell dans ce dépôt :
 ./scripts/package.ps1
 ```
 
-Ou utiliser CMake directement :
+La voie réellement exécutée sur cette machine est **Zig + CMake + Ninja** :
+voir [BUILD.md](docs/BUILD.md). `scripts/build-zig.ps1` compile OpenUVCore, le CLI et les tests,
+exécute CTest, puis installe le binaire dans `addon/bin`. `scripts/package.ps1` génère le ZIP
+à côté du dépôt. Pour actualiser la copie publique :
 
 ```powershell
-cmake -S . -B build
-cmake --build build --config Release
-ctest --test-dir build -C Release --output-on-failure
-cmake --install build --config Release --prefix .
+Copy-Item ../OpenUV-Packer-addon.zip dist/OpenUV-Packer-addon.zip -Force
 ```
 
-Voir `docs/BUILD.md` pour la chaîne portable employée lors de cette livraison.
-La bibliothèque statique `OpenUVCore` est construite séparément de `openuv_engine`.
-L’exécutable est installé dans `addon/bin`. Aucun paquet Python externe n’est requis.
+## Mesures et tests
 
-## Tests et mesures
+[Rapport 0.2.0](docs/PHASE2_REPORT.md), [rapports historiques](docs/TEST_REPORT.md).
+Les mesures comparent les mêmes rectangles avec `--shelf` et le portefeuille MaxRects,
+avec trois répétitions. Elles ne constituent pas une comparaison à Blender Pack Islands ou UVPackmaster.
 
 ```powershell
-python tests/test_packing.py
-python scripts/benchmark.py > benchmarks/local.json
+python scripts/benchmark_phase2.py --repeats 3 > benchmarks/local-phase2.json
 ```
 
-Tests natifs via CTest, tests Blender sans interface via `scripts/test.ps1`.
-Les benchmarks utilisent des rectangles synthétiques et mesurent une seule exécution :
-ils ne prouvent ni une occupation polygonale réelle ni une accélération face à un autre produit.
-Les résultats exécutés et leurs limites figurent dans `docs/TEST_REPORT.md`.
+Le script optionnel `scripts/extract_benchmark_blender.py` extrait des dimensions depuis une scène
+sans la sauvegarder. Les tests `tests/blender_real_mesh.py` sont également réalisés en mémoire.
+Le modèle utilisateur n'est pas inclus au dépôt ; seuls les résumés chiffrés sont publiés.
 
-## Limites importantes
+## État de la phase 2 et limites
 
-**Phase 1 uniquement.** Placement conservateur par rectangles, sans optimum garanti.
-Les formes concaves et trous ne sont pas exploités : ils occupent leur rectangle englobant.
-Le packer empêche les intersections entre rectangles des îlots traités, mais ne corrige pas
-les UV déjà auto-superposés à l’intérieur d’un même îlot. Les éléments non sélectionnés
-ne sont pas des obstacles ; sélectionner tous les îlots pour valider l’ensemble d’une tuile.
-Les faces cachées sont exclues. Les arêtes non manifold sont des frontières d’îlots.
-Les UV de largeur ou hauteur nulle sont refusés. Seule la tuile [0,1]² (1001) est utilisée.
-L’appel est synchrone et peut bloquer l’interface sur de gros maillages ; timeout natif 120 s.
-Le validateur utilise une tolérance de 1e-9 en double ; les UV Blender sont stockés en float32.
-La vérification après écriture dans Blender utilise une tolérance distincte de 1e-6.
+Cette version livre le **premier jalon de la phase 2 : MaxRects et statistiques**.
+Les îlots concaves et les trous restent représentés par leur rectangle englobant.
+**Non implémentés** : extraction des contours polygonaux, placement polygonal, NFP, Skyline,
+recherche locale/annealing, limite de temps configurable, densité absolue des texels,
+unités pixels, UDIM, verrouillages/obstacles, groupes, empilement, priorités, Vulkan,
+occupation polygonale réelle, mesure mémoire et comparaison à Blender Pack Islands.
+Aucun optimum mathématique n'est garanti. Voir [ROADMAP.md](docs/ROADMAP.md).
 
-Non implémentés : MaxRects, skyline, packing polygonal, NFP, recherche locale/annealing,
-limite de temps configurable, niveaux de qualité, densité absolue des texels, unités pixels,
-UDIM, obstacles verrouillés, groupes, empilement, priorités, statistiques polygonales,
-Vulkan Compute, identification GPU, comparaison à Blender Pack Islands, mesures mémoire.
-Aucun bouton GPU factice n’est présenté. Voir `docs/ROADMAP.md`.
+## Sources
 
-## Organisation
+`addon/` : opérateurs, panneau, propriétés et pont Python (paquet `openuv_packer` dans le ZIP).
+`engine/include` et `engine/src` : bibliothèque OpenUVCore et CLI.
+`engine/algorithms`, `engine/geometry`, `engine/cpu` : MaxRects, validation et recherche.
+`tests/`, `benchmarks/`, `scripts/`, `docs/` : vérification, mesures et documentation.
 
-`addon/` : sources du paquet installable (renommé `openuv_packer` dans le ZIP), opérateur,
-panneau, propriétés, pont et secours Python. `engine/include` et `engine/src` : bibliothèque
-et CLI. `tests` : géométrie, refus et intégration Blender. `scripts` : build, test, package,
-benchmark. `benchmarks` : résultats mesurés. `docs` : spécification, architecture, rapports.
-Les dossiers réservés aux phases suivantes sont documentés et ne contiennent pas de faux backend.
-
-Copyright (C) 2026 OpenUV Packer contributors. Redistribution et modification selon
-GPL version 3 ou ultérieure. Aucune garantie. Texte complet dans LICENSE.
+Copyright (C) 2026 OpenUV Packer contributors. GPL version 3 ou ultérieure ; aucune garantie.
+Voir LICENSE.

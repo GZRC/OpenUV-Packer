@@ -2,14 +2,19 @@
 import bpy
 import bmesh
 import subprocess
+import math
+import time
 from ..bridge.packing import pack, check
 
 def islands(bm, uv):
     """Full visible islands; shared mesh edge AND UV endpoints must match."""
     faces = {f for f in bm.faces if not f.hide}
     result = []
-    while faces:
-        seed = faces.pop()
+    # Stable mesh face order avoids allocator-dependent ordering of equal-size islands.
+    for seed in bm.faces:
+        if seed not in faces:
+            continue
+        faces.remove(seed)
         group, stack = [seed], [seed]
         while stack:
             face = stack.pop()
@@ -36,6 +41,10 @@ class OPENUV_OT_pack(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
+        started = time.perf_counter()
+        context.scene.openuv_stats = ''
+        context.scene.openuv_stats_detail = ''
+        context.scene.openuv_stats_engine = ''
         obj = context.edit_object
         if obj is None or obj.type != 'MESH':
             self.report({'ERROR'}, 'Select a mesh in Edit Mode')
@@ -66,7 +75,8 @@ class OPENUV_OT_pack(bpy.types.Operator):
         boxes = [(c-a,d-b) for a,b,c,d in bounds]
         scene = context.scene
         try:
-            scale, places, backend = pack(boxes, scene.openuv_margin, scene.openuv_rotate, scene.openuv_backend)
+            scale, places, backend = pack(boxes, scene.openuv_margin, scene.openuv_rotate,
+                                          scene.openuv_backend, scene.openuv_quality)
             check(boxes, scene.openuv_margin, scale, places)
             changes = []
             for ls,(a,b,c,d),(x,y,r) in zip(loops,bounds,places):
@@ -74,14 +84,22 @@ class OPENUV_OT_pack(bpy.types.Operator):
                     u,v = l[uv].uv.x-a, l[uv].uv.y-b
                     if r:
                         u,v = d-b-v,u
-                    changes.append((l,(x+u*scale,y+v*scale)))
+                    target = (x+u*scale,y+v*scale)
+                    if any(not math.isfinite(value) or abs(value)>3.4e38 for value in target):
+                        raise ValueError('Invalid transformed UV coordinate')
+                    changes.append((l,target))
             for l,position in changes:
                 l[uv].uv = position
             bmesh.update_edit_mesh(obj.data, loop_triangles=False, destructive=False)
         except (ValueError, OSError, subprocess.TimeoutExpired) as exc:
             self.report({'ERROR'}, str(exc))
             return {'CANCELLED'}
-        self.report({'INFO'}, f'{len(groups)} islands; {backend}; scale {scale:.5f}')
+        elapsed = time.perf_counter()-started
+        area = sum(w*h for w,h in boxes)*scale*scale
+        scene.openuv_stats = f'{len(groups)} islands | {elapsed:.3f} s total'
+        scene.openuv_stats_detail = f'Scale {scale:.5f} | box area {area:.1%}'
+        scene.openuv_stats_engine = backend
+        self.report({'INFO'}, f'{len(groups)} islands; {backend}; scale {scale:.5f}; bbox area {area:.1%}; {elapsed:.3f}s total')
         return {'FINISHED'}
 
 

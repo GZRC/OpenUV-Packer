@@ -1,0 +1,290 @@
+[
+  {
+    "name": "ailes",
+    "islands": 93,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 7.5971749565693525,
+    "cases": {
+      "shelf": {
+        "scale": 0.8354251988559733,
+        "bbox_area": 0.773187873081678,
+        "seconds": [
+          0.014241799999581417,
+          0.012317299999267561,
+          0.010083499999382184
+        ],
+        "median_seconds": 0.012317299999267561,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.898893912844329,
+        "bbox_area": 0.8951313576558851,
+        "seconds": [
+          0.06081280000034894,
+          0.04710700000032375,
+          0.04785170000104699
+        ],
+        "median_seconds": 0.04785170000104699,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Area 6 0"
+      }
+    }
+  },
+  {
+    "name": "bras",
+    "islands": 35,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 9.330010500140373,
+    "cases": {
+      "shelf": {
+        "scale": 1.1984727912230677,
+        "bbox_area": 0.7484594522837651,
+        "seconds": [
+          0.008755400000154623,
+          0.00915309999982128,
+          0.009008400000311667
+        ],
+        "median_seconds": 0.009008400000311667,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 1.3102904284855053,
+        "bbox_area": 0.8946374151248625,
+        "seconds": [
+          0.013755399999354267,
+          0.013655799999469309,
+          0.012587899998834473
+        ],
+        "median_seconds": 0.013655799999469309,
+        "engine_metadata": "OPENUV MaxRects-BAF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "brase3d",
+    "islands": 215,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 6.5529127183193925,
+    "cases": {
+      "shelf": {
+        "scale": 0.8367042716743384,
+        "bbox_area": 0.7655063959042445,
+        "seconds": [
+          0.011980899998889072,
+          0.01466910000090138,
+          0.013491800000338117
+        ],
+        "median_seconds": 0.013491800000338117,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.8915327723076076,
+        "bbox_area": 0.8691194632351369,
+        "seconds": [
+          0.3271292999997968,
+          0.34056149999923946,
+          0.411276299999372
+        ],
+        "median_seconds": 0.34056149999923946,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "corps",
+    "islands": 56,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 7.852059288711932,
+    "cases": {
+      "shelf": {
+        "scale": 0.8276803302954064,
+        "bbox_area": 0.7535872903169102,
+        "seconds": [
+          0.009205599999404512,
+          0.009773700001460384,
+          0.009258400001272094
+        ],
+        "median_seconds": 0.009258400001272094,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.8926702805512086,
+        "bbox_area": 0.8765777619824668,
+        "seconds": [
+          0.02031650000026275,
+          0.02297980000003008,
+          0.02024849999907019
+        ],
+        "median_seconds": 0.02031650000026275,
+        "engine_metadata": "OPENUV MaxRects-BAF-Area 6 0"
+      }
+    }
+  },
+  {
+    "name": "jambes",
+    "islands": 46,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 9.763969631900693,
+    "cases": {
+      "shelf": {
+        "scale": 1.191208580252328,
+        "bbox_area": 0.7408979590560384,
+        "seconds": [
+          0.009130899999945541,
+          0.00882360000105109,
+          0.00860379999903671
+        ],
+        "median_seconds": 0.00882360000105109,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 1.3075178242807608,
+        "bbox_area": 0.8926434208291312,
+        "seconds": [
+          0.015060900001117261,
+          0.014954199999920093,
+          0.015061000000059721
+        ],
+        "median_seconds": 0.015060900001117261,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Area 6 0"
+      }
+    }
+  },
+  {
+    "name": "main",
+    "islands": 55,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 8.943758204505814,
+    "cases": {
+      "shelf": {
+        "scale": 0.8185290735722387,
+        "bbox_area": 0.7382608785261435,
+        "seconds": [
+          0.008762899999055662,
+          0.00882360000105109,
+          0.008711000000403146
+        ],
+        "median_seconds": 0.008762899999055662,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.8917363347461212,
+        "bbox_area": 0.8762228229408692,
+        "seconds": [
+          0.01995389999865438,
+          0.020284099999116734,
+          0.019639500000266708
+        ],
+        "median_seconds": 0.01995389999865438,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "pied",
+    "islands": 51,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 4.958986567190737,
+    "cases": {
+      "shelf": {
+        "scale": 0.8677438670125489,
+        "bbox_area": 0.8134662661591163,
+        "seconds": [
+          0.009461400000873255,
+          0.010163200000533834,
+          0.009180499999274616
+        ],
+        "median_seconds": 0.009461400000873255,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.9107751688153226,
+        "bbox_area": 0.8961460713486781,
+        "seconds": [
+          0.01794979999976931,
+          0.017641200000070967,
+          0.018478699999832315
+        ],
+        "median_seconds": 0.01794979999976931,
+        "engine_metadata": "OPENUV MaxRects-BAF-Side 6 0"
+      }
+    }
+  },
+  {
+    "name": "TAIL",
+    "islands": 33,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 8.768844921670095,
+    "cases": {
+      "shelf": {
+        "scale": 0.9482825410122833,
+        "bbox_area": 0.7409693968790152,
+        "seconds": [
+          0.008722799999304698,
+          0.008933499999329797,
+          0.00871000000006461
+        ],
+        "median_seconds": 0.008722799999304698,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 1.031435966452923,
+        "bbox_area": 0.876615820939633,
+        "seconds": [
+          0.013428500000372878,
+          0.013490699999238132,
+          0.013023100000282284
+        ],
+        "median_seconds": 0.013428500000372878,
+        "engine_metadata": "OPENUV MaxRects-BSSF-Area 6 0"
+      }
+    }
+  },
+  {
+    "name": "t\u00eate",
+    "islands": 181,
+    "margin": 0.0020000000949949026,
+    "rotate": true,
+    "repeats": 3,
+    "linear_scale_gain_percent": 5.844568010828799,
+    "cases": {
+      "shelf": {
+        "scale": 0.8355631092677616,
+        "bbox_area": 0.7666320087243116,
+        "seconds": [
+          0.011271200000919634,
+          0.011130400000183727,
+          0.0124190999995335
+        ],
+        "median_seconds": 0.011271200000919634,
+        "engine_metadata": "OPENUV Shelf-Side 2 0"
+      },
+      "portfolio": {
+        "scale": 0.8843981634623116,
+        "bbox_area": 0.8588634033895618,
+        "seconds": [
+          0.2108765000011772,
+          0.21128549999957613,
+          0.21007619999909366
+        ],
+        "median_seconds": 0.2108765000011772,
+        "engine_metadata": "OPENUV MaxRects-BAF-Side 6 0"
+      }
+    }
+  }
+]

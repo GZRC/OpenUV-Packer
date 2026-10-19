@@ -47,6 +47,21 @@ class PackingTests(unittest.TestCase):
             self.assertNotEqual(result.returncode,0)
             self.assertEqual(result.stdout,'')
 
+    def test_quality_and_baseline(self):
+        exe = path.parents[1]/'bin'/('openuv_engine.exe' if sys.platform == 'win32' else 'openuv_engine')
+        if not exe.exists():
+            self.skipTest('Native engine not installed')
+        rng = random.Random(51)
+        boxes = [(rng.uniform(.01,1),rng.uniform(.01,1)) for _ in range(51)]
+        baseline = p.pack_python(boxes,.002,True)[0]
+        for quality in ('FAST','BALANCED','HIGH'):
+            scale,places,label = p.pack(boxes,.002,True,'NATIVE',quality)
+            p.check(boxes,.002,scale,places)
+            self.assertGreaterEqual(scale+1e-9,baseline)
+            self.assertIn('searches',label)
+        with self.assertRaises(ValueError):
+            p.pack(boxes,.002,True,'NATIVE','INVALID')
+
 
 if __name__ == '__main__':
     unittest.main()
