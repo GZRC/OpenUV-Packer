@@ -1,0 +1,29 @@
+-- The CXX compiler identification is Clang 21.1.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: <WORKSPACE>/outputs/OpenUV-Packer/build-zig/tools/cxx.cmd - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (3.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: <WORKSPACE>/outputs/OpenUV-Packer/build-zig
+[1/6] Building CXX object CMakeFiles/openuv_engine.dir/engine/src/main.cpp.obj
+[2/6] Building CXX object CMakeFiles/OpenUVCore.dir/engine/src/core.cpp.obj
+[3/6] Linking CXX static library libOpenUVCore.a
+[4/6] Linking CXX executable openuv_engine.exe
+[5/6] Building CXX object CMakeFiles/openuv_tests.dir/tests/native_tests.cpp.obj
+[6/6] Linking CXX executable openuv_tests.exe
+Test project <WORKSPACE>/outputs/OpenUV-Packer/build-zig
+    Start 1: core_geometry
+1/2 Test #1: core_geometry ....................   Passed    0.10 sec
+    Start 2: native_selftest
+2/2 Test #2: native_selftest ..................   Passed    0.05 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   0.20 sec
+-- Install configuration: "Release"
+-- Installing: <WORKSPACE>\outputs\OpenUV-Packer/addon/bin/openuv_engine.exe

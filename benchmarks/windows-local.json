@@ -1,0 +1,50 @@
+[
+  {
+    "n": 10,
+    "backend": "Python CPU",
+    "seconds": 0.0016256999988399912,
+    "bbox_area": 0.5965276171494073
+  },
+  {
+    "n": 10,
+    "backend": "C++ CPU (2 searches)",
+    "seconds": 0.0651864999999816,
+    "bbox_area": 0.5965276171494073
+  },
+  {
+    "n": 100,
+    "backend": "Python CPU",
+    "seconds": 0.015541999999186373,
+    "bbox_area": 0.8511689914942281
+  },
+  {
+    "n": 100,
+    "backend": "C++ CPU (2 searches)",
+    "seconds": 0.027513700000781682,
+    "bbox_area": 0.8511689914942281
+  },
+  {
+    "n": 1000,
+    "backend": "Python CPU",
+    "seconds": 0.15759160000015981,
+    "bbox_area": 0.89572264330828
+  },
+  {
+    "n": 1000,
+    "backend": "C++ CPU (2 searches)",
+    "seconds": 0.05340119999891613,
+    "bbox_area": 0.89572264330828
+  },
+  {
+    "n": 10000,
+    "backend": "Python CPU",
+    "seconds": 2.3260351000008086,
+    "bbox_area": 0.7957537095059422
+  },
+  {
+    "n": 10000,
+    "backend": "C++ CPU (2 searches)",
+    "seconds": 0.6444755000011355,
+    "bbox_area": 0.7957537095059425
+  }
+]
